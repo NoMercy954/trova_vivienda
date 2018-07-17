@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<openerp>
+		<data>
+			<record id="trova_viv_paquete_modelo_tree" model="ir.ui.view">
+				<field name="name">trova.viv.paquete.modelo.tree</field>
+				<field name="model">trova.vivienda.paquete</field>
+				<field name="arch" type="xml">
+					<tree>
+						<field name="name"/>
+						<field name="estado"/>
+					</tree>
+                    </field>
+			</record>
+			<record id="trova_viv_paquete_modelo_form" model="ir.ui.view">
+				<field name="name">trova.viv.paquete.modelo.form</field>
+				<field name="model">trova.vivienda.paquete</field>
+				<field name="arch" type="xml">
+                    <form string ="Formulario de paquete" version="9.0">
+                    	<sheet>
+                    		<div>
+                    			<h1><field name="name" requierd="1"/></h1>
+                    		</div>
+                    			<group name="group">
+                    				<group name="group_left">
+                    					<field name="estado"/>
+                    				</group>
+                    				<group name="group_rigth">
+                    					<field name="corretaje"/>
+                    					<field name="subastaprop"/>
+                    					<field name="compradir"/>
+                    					<field name="prestaserv"/>
+                    				</group>
+                    			</group>
+                    	</sheet>
+                    </form>
+                </field>
+            </record>
+		</data>
+	</openerp>

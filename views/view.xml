@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+     <!--  Creamos la primera interface  -->
+  <record id="trova_vivienda_modelo_tree" model="ir.ui.view">
+        <field name="name">trova_vivienda.modelo.tree</field>
+        <field name="model">trova.vivienda</field>
+        <field name="arch" type="xml"> 
+            <tree string ="Listado de viviendas">
+              <field name="folio"/>
+              <field name="folioreal"/>
+              <field name="paquete"/>
+              <field name="subasta"/>
+              <field name="address"/>
+            </tree>      	
+        </field>
+  </record>
+      <!--  2da interface de creacion y llenado de formulario -->
+ <record id="trova_vivienda_modelo_form" model="ir.ui.view">
+    <field name="name">trova.vivienda.modelo.form</field>
+    <field name="model">trova.vivienda</field>
+    <field name="arch" type="xml">
+       <form string ="Formulario de datos de vivienda" version="9.0">
+          <header><field name="etapas" widget="statusbar" clickable="1" /></header>
+        <sheet> 
+          <div>
+              <field name="logo_viv" widget="image"/>
+          </div>
+        <group name="group0"> 
+            <group name="group_left">
+                <h2>
+                  <field name="name" requier="1" readonly="1"/>
+                </h2>
+                <field name="folio" readonly="1"/>
+                <field name="folioreal" />
+                <field name="paquete"/>
+                <field name="subasta" />
+            </group>
+            <group name="group_rigth">
+                <field name="desarrollo" />
+                <field name="estado"/> 
+                <field name="municipio" /> 
+                <field name="address" />
+                <field name="tipo_venta" />
+            </group>                        
+        </group>
+        
+      <notebook id="trova_vivienda_informacion">
+            <page name="info_vivienda" string="Informacion Vivienda">
+                <group name="group2"> 
+                  <group name="group_left">
+                      <field name="recamaras" />
+                      <field name="fotos" />
+                      <field name="clg"/>
+                      <field name="aca" />
+                  </group>
+                  <group name="group_rigth">
+                    <field name="piso" /> 
+                    <field name="proteccion" />
+                    <field name="avalcat" />
+                  </group>                     
+                </group>
+            </page>
+      </notebook>
+    </sheet>
+</form>      	
+</field>
+</record>
+
+<!--  Definimos los eventos -->
+
+<!--  Boton Vivienda -->
+<record id="trova_vivienda_menu_action" model="ir.actions.act_window">
+   <field name="name">Vivienda</field>
+   <field name="res_model">trova.vivienda</field>
+   <field name="view_type">form</field>
+   <field name="view_mode">tree,form</field>
+</record>
+
+<!--  Boton Desarrollo -->
+<record id="trova_viv_des_menu_action" model="ir.actions.act_window">
+   <field name="name">Desarrollos</field>
+   <field name="res_model">trova.vivienda.desa</field>
+   <field name="view_type">form</field>
+   <field name="view_mode">tree,form</field>
+</record>
+
+<!--  Boton de Saneamiento -->
+<record id="trova_viv_sanea_menu_action" model="ir.actions.act_window">
+   <field name="name">Saneamiento</field>
+   <field name="res_model">trova.vivienda.sanea</field>
+   <field name="view_type">form</field>
+   <field name="view_mode">tree,form</field>
+</record>
+
+<!--  Boton de Titulacion -->
+<record id="trova_viv_titu_menu_action" model="ir.actions.act_window">
+   <field name="name">Titulacion</field>
+   <field name="res_model">trova.vivienda.titu</field>
+   <field name="view_type">form</field>
+   <field name="view_mode">tree,form</field>
+</record>
+
+<!--  Boton de Paquete -->
+<record id="trova_viv_paq_menu_action" model="ir.actions.act_window">
+   <field name="name">Paquete</field>
+   <field name="res_model">trova.vivienda.paquete</field>
+   <field name="view_type">form</field>
+   <field name="view_mode">tree,form</field>
+</record>
+
+<!--  Boton de Municipio -->
+<record id="trova_viv_muni_menu_action" model="ir.actions.act_window">
+   <field name="name">Municipio</field>
+   <field name="res_model">trova.vivienda.muni</field>
+   <field name="view_type">form</field>
+   <field name="view_mode">tree,form</field>
+</record>
+
+<!--  Boton de Subasta -->
+<record id="trova_viv_subasta_menu_action" model="ir.actions.act_window">
+   <field name="name">Subasta</field>
+   <field name="res_model">trova.vivienda.suba</field>
+   <field name="view_type">form</field>
+   <field name="view_mode">tree,form</field>
+</record>
+
+<!--  Boton de Tipo de Venta -->
+<record id="trova_viv_tipo_venta_menu_action" model="ir.actions.act_window">
+   <field name="name">Tipo de Venta</field>
+   <field name="res_model">trova.vivienda.tipo_venta</field>
+   <field name="view_type">form</field>
+   <field name="view_mode">tree,form</field>
+</record>
+
+
+
+
+<!--  Definimos el menu se necesita el action para poder mostrarse en la tira del menu"-->
+<menuitem id="trova_vivienda_root" name="Vivienda"/>
+<menuitem id="trova_vivienda_menu0" name="Vivienda" sequence="0" parent="trova_vivienda_root" action="trova_vivienda_menu_action"/>
+<menuitem id="trova_vivienda_menu1" name="Desarrollos" sequence="1" parent="trova_vivienda_root" action="trova_viv_des_menu_action"/>
+<menuitem id="trova_vivienda_menu2" name="Saneamiento" sequence="2" parent="trova_vivienda_root" action="trova_viv_sanea_menu_action"/>
+<menuitem id="trova_vivienda_menu3" name="Titulacion" sequence="3" parent="trova_vivienda_root" action="trova_viv_titu_menu_action"/>
+<!--  Boton de Coonfiguracion, sin "action" para desplegar lista -->
+<menuitem id="trova_vivienda_menu4" name="Configuracion" sequence="4" parent="trova_vivienda_root" />
+<!--  Enlazamos la acción en el submenú-->
+<menuitem id="trova_vivienda_submenu_action1" name="Municipio" sequence="5" parent="trova_vivienda_menu4" action="trova_viv_muni_menu_action" />
+<menuitem id="trova_vivienda_submenu_action2" name="Paquete" sequence="7" parent="trova_vivienda_menu4" action="trova_viv_paq_menu_action" />
+<menuitem id="trova_vivienda_submenu_action3" name="Subasta" sequence="8" parent="trova_vivienda_menu4" action="trova_viv_subasta_menu_action" />
+<menuitem id="trova_vivienda_submenu_action4" name="Tipo de Venta" sequence="8" parent="trova_vivienda_menu4" action="trova_viv_tipo_venta_menu_action" />
+
+
+
+<record id="inherit_sale_order" model="ir.ui.view">
+       <field name="name">inherit_sale_order</field>
+       <field name="model">sale.order</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='validity_date']" position="before">
+                  <field name="vivienda"/>
+                </xpath>
+            </field>
+</record>
+
+                 
+<record id="inherit_res_partner" model="ir.ui.view">
+            <field name="name">inherit_res_partner</field>
+            <field name="model">res.partner</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="arch" type="xml">
+       <xpath expr="//form[1]/sheet[1]/notebook[1]" position="inside">
+                    <page name="datos_generales" string="Datos Generales">
+                            <group name="group"> 
+                                <group name="group_left">
+                                    <field name="fechanac"/>
+                                    <field name="curp"/>
+                                    <field name="esque_credito"/>
+                                </group>
+                                <group name="group_rigth">
+                                    <field name="nss"/> 
+                                    <field name="estado_civil"/>
+                                    <field name="credito_conyu"/>
+                                </group>                     
+                            </group>
+                    </page>
+
+                    <page name="datos_trabajo" string="Datos de Trabajo">
+                            <group name="group"> 
+                                <group name="group_left">
+                                    <field name="numext"/>
+                                    <field name="entre"/>
+                                    <field name="municipio"/>
+                                    <field name="areaodep"/>
+                                    <field name="extension"/>                               
+                                </group>
+                                <group name="group_rigth">
+                                    <field name="calle"/> 
+                                    <field name="numint"/>
+                                    <field name="colonia"/>
+                                    <field name="estado"/> 
+                                    <field name="nrp"/>
+                                    <field name="tel"/>                                    
+                                </group>                     
+                            </group>
+                    </page>
+
+                    <page name="refer_personal" string="Referencias Personales">
+                            <group name="group"> 
+                                <group name="group_left">
+                                    <field name="nombcompleto1"/>
+                                    <field name="tel_lada1"/>
+                                    <field name="refer1"/>
+                                </group>
+                                <group name="group_rigth">
+                                    <field name="nombcompleto2"/> 
+                                    <field name="tel_lada2"/>
+                                    <field name="refer2"/>
+                                </group>                     
+                            </group>
+                    </page>
+
+                </xpath>
+                </field>          
+  </record>
+</data>
+</openerp>

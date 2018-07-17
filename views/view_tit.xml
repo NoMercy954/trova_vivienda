@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<openerp>
+		<data>
+			<record id="trova_viv_titulacion_modelo_tree" model="ir.ui.view">
+        		<field name="name">trova.viv.titulacion.modelo.tree</field>
+        		<field name="model">trova.vivienda.titu</field>
+        		<field name="arch" type="xml"> 
+            		<tree string ="Listado de titulaciones">
+             			<field name="name"/>
+             			<field name="folio" />
+             			<field name="etapa" />
+         			</tree> 
+                </field>
+            </record>
+            <record id="trova_viv_titulacion_modelo_form" model="ir.ui.view">
+                <field name="name">trova.viv.titulacion.modelo.form</field>
+                <field name="model">trova.vivienda.titu</field>
+                <field name="arch" type="xml">
+                    <form string ="Formulario de datos de Titulacion" version="9.0">
+                    <sheet> 
+                            <div>
+                                <h1>
+                                   <field name="name" readonly="1"/>
+                                </h1>
+                            </div>
+                    <group name="group"> 
+                        <group name="group_left">
+                            <field name='presupuesto'/>
+                            <field name='folio'/>
+                            <field name='asesor'/>
+                            <field name='confirmventa'/>
+                            <field name="tipocredito" /> 
+                        </group>
+                        <group name="group_rigth">
+                            <field name="cliente" />
+                            <field name="nss" />
+                            <field name="telefono"/>
+                            <field name="numtaria" />
+                            <field name="numcredifona" />
+                            <field name="comentariostit" />
+                        </group>                  
+                    </group>
+                    </sheet>
+                    </form>
+                </field>
+            </record>
+	</data>
+</openerp>	
+
+

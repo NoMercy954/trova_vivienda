@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_contrato_vent">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                       <div class="page">
+
+                        <h2>Hola mundo</h2>
+                                
+                       </div> <!---     DIV PAGE  -->
+                    </t>
+                </t>    <!---     FOREACH DOCS  -->
+            </t>
+        </template>
+
+        <report
+            string="Contrato de Venta"
+            id="action_report_contrato_viv"
+            model="sale.order"
+            report_type="qweb-pdf"
+            name="trova_vivienda.report_contrato_vent"
+            file="trova_vivienda.report_contrato_vent"
+        />
+
+    </data>
+</odoo>
