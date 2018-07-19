@@ -1,6 +1,7 @@
-from openerp import api, _, tools, fields, models, time, exceptions
+from odoo import api, _, tools, fields, models, exceptions
 from odoo.exceptions import AccessError, UserError, RedirectWarning, ValidationError, Warning
-
+from datetime import datetime
+from . import amount_to_text
 
 class TrovaVivienda(models.Model):
 	"""docstring for ClassName"""
@@ -33,7 +34,9 @@ class TrovaVivienda(models.Model):
 		else:
 			text=str(max(id_returned)+1)
 		return text
-	
+
+			
+
 	name = fields.Char('Nombre' , size=150, required=True, default=_name_default)
 	folio = fields.Char('Folio' , required=True, help='Este es el Folio', default=_folio_default)
 	folioreal = fields.Integer('Folio Real' , size=20, required=True, help='Este es el Folio Real')
@@ -58,7 +61,15 @@ class TrovaVivienda(models.Model):
 							   ('porfirma','Por firmar'),
 							   ('firmada','Firmada'),
 							   ('cancelada','Cancelada')], help='Status',index=True)
-
+	precioventa = fields.Float('Precio de Venta' , required=True, help='Este sera el precio con el que se vendera la vivienda',  obj="res.currency")
+	preciocompra = fields.Float('Precio de Compra' , required=True, help='Este sera el precio con el que se comprara la vivienda',  obj="res.currency")
+	amount_to_text = fields.Char(compute='_get_amount_to_text', string='Monto en Texto', readonly=True,
+                                 help='Amount of the invoice in letter', store=True)
+	@api.one
+	@api.depends('precioventa')
+	def _get_amount_to_text(self):
+		self.amount_to_text = amount_to_text.get_amount_to_text(self, self.precioventa, 'MXN')
+	
 class TrovaVivTitu(models.Model):
 	
 	_name = 'trova.vivienda.titu'
@@ -107,10 +118,6 @@ class TrovaVivTitu(models.Model):
 		if self.cliente:
 			self.nss = self.cliente.nss
 			self.telefono = self.cliente.phone
-
-
-
-
 class TrovaVivDesarollo(models.Model):
 	_name = 'trova.vivienda.desa'
 	_description = 'Pantalla de Desarrollo'
@@ -118,7 +125,6 @@ class TrovaVivDesarollo(models.Model):
 	name = fields.Char('Nombre' , size=150, required=True)
 	estado =  fields.Many2one('res.country.state',domain="[('country_id.code','=','MX')]", string="Estado", required=True)
 	municipio = fields.Many2one('trova.vivienda.muni',string='Municipio' , size=150, required=True, help='El municipio')
-
 class TrovaVivSaneamiento(models.Model):
 	_name = 'trova.vivienda.sanea'
 	_description = 'Pantalla de Saneamiento'
@@ -166,7 +172,6 @@ class TrovaVivSaneamiento(models.Model):
 		if self.folio:
 			self.address = self.folio.address
 			self.estado = self.folio.estado
-
 class TrovaVivPaq(models.Model):
 	_name = 'trova.vivienda.paquete'
 	_description = 'Ventana de paquetes'
@@ -177,33 +182,35 @@ class TrovaVivPaq(models.Model):
 	subastaprop = fields.Boolean(string='Subasta Propia')
 	compradir = fields.Boolean(string='Compras Directas')
 	prestaserv = fields.Boolean(string='Prestacion de Servicios')
-
 class TrovaVivMuni(models.Model):
 	_name = 'trova.vivienda.muni'
 	_description = 'Pantalla de Municipio'
 
 	name = fields.Char('Nombre' , size=150, required=True)
-
 class TrovaVivSubasta(models.Model):
 	"""docstring for TrovaTitu"""
 	_name = 'trova.vivienda.suba'
 	_description = 'Pantalla de subasta'
 
 	name = fields.Char('Nombre' , size=150, required=True)
-
 class TrovaVivTipoVenta(models.Model):
 	"""docstring for TrovaTitu"""
 	_name = 'trova.vivienda.tipo_venta'
 	_description = 'Pantalla de Tipo de Venta'
 
 	name = fields.Char('Nombre' , size=150, required=True)
-
 class TrovaVivSale(models.Model):
 	"""docstring for TrovaTitu"""
 	_inherit = 'sale.order'
 
 	vivienda = fields.Many2one('trova.vivienda', string="Vivienda")
+	address = fields.Char('Direccion' , size=150, required=True, help='Esta es la Direccion')
+	fechacontrato = fields.Datetime(string='Fecha del contrato' , required=True, help='Puedes elegir una fecha de impresion para el contrato')
 
+	@api.onchange('vivienda')
+	def onchange_vivienda(self):
+		if self.vivienda:
+			self.address = self.vivienda.address
 class TrovaVivClientes(models.Model):
 	_inherit = 'res.partner'
 

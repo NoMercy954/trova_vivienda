@@ -6,9 +6,92 @@
                 <t t-foreach="docs" t-as="o">
                     <t t-call="web.external_layout">
                        <div class="page">
+                        <h3 style="text-align: center;">Contrato de Promesa de Venta</h3>
+                        <p style="text-align: justify;"> 
+                            Contrato preparatorio de promesa de compraventa, que celebran por una parte La
+                            Sociedad denominada <b t-field="o.company_id.partner_id"></b>. representada en este acto por el Licenciado <b>JORGE ARMANDO RODRÍGUEZ RUVALCABA</b> como vendedor quien para los fines de este contrato será conocido como “El vendedor” y como contraparte el cliente <b t-field="o.partner_id" ></b>, que será denominado como comprador para los fines correspondientes.
+                        </p>
+                        <br/>
+                        <p style="text-align: justify;"> 
+                            Siendo <span t-esc="datetime.datetime.strptime(o.fechacontrato, '%Y-%m-%d %H:%M:%S').strftime('%A %d %B %Y')"/> celebramos el presente contrato.
+                        </p>
+                        <br/>
+                        <p style="text-align: justify;">
+                            Ambas partes se comprometen a sujetarse a las declaraciones y cláusulas siguientes:
+                        </p>             
+                        <br/>        
+                        <h4 style="text-align: center;">Declaraciones:</h4>
+                        <br/>
+                        <p style="text-align: justify;">
+                            - A) Vendedor: <b t-field="o.company_id.partner_id"></b>. Representada en este acto por el Licenciado JORGE ARMANDO RODRÍGUEZ RUVALCABA, Av. Niños Héroes  #2285  int 201, Col. Moderna, Guadalajara, Jalisco, Teléfonos: (33) 3615 0195 O (33) 3616 2385 Correo: atencionalcliente@trovainmobiliaria.com.
+                        </p>
+                        <p style="text-align: justify;">
+                            - B) Comprador: <b t-field="o.partner_id"></b>, con fecha de nacimiento <spant t-field="o.partner_id.fechanac"/>, y el cual cuanta con Clave Única de Registro de Población <spant t-field="o.partner_id.curp"/> y cuento con Registro Federal de Contribuyentes <spant t-field="o.partner_id.vat"/>, con domicilio en <spant t-field="o.partner_id.street_name"/>, colonia <spant t-field="o.partner_id.l10n_mx_edi_colony"/> con numero exterior <spant t-field="o.partner_id.street_number"/>, numero interior <spant t-field="o.partner_id.street_number2"/> en la localidad de <spant t-field="o.partner_id.l10n_mx_edi_locality"/> estado de <spant t-field="o.partner_id.state_id"/>, y cuenta con número de teléfono <spant t-field="o.partner_id.phone"/>.
+                        </p>
+                        <br/>
+                        <p style="text-align: justify;">
+                            “El vendedor” declara ser propietario de un inmueble ubicado en <b t-field="o.vivienda.address"></b>, en el municipio de <b t-field="o.vivienda.municipio"></b>, en el Estado de <b t-field="o.vivienda.estado"></b>.
+                        </p>
+                        <br/>
+                        <p style="text-align: justify;">
+                            Declaran ambas partes, realizar el presente contrato, sin presión alguna y con plena conciencia de su contenido y finalidad.
+                        </p>
+                        <br/>
+                        <h4 style="text-align: center;">Cláusulas:</h4>
+                        <br/>
+                        <p style="text-align: justify;">
+                            Primera.- Por medio de este contrato el vendedor, se compromete a otorgar y firmar un contrato formal de compraventa a favor del interesado, respecto al inmueble  arriba citado.
+<br/><br/>
+                            Segunda. - Para este fin, se fija un monto de $ <b t-field="o.vivienda.precioventa"></b> <b t-field="o.vivienda.amount_to_text"></b>  
+ Siendo valor total de la compraventa más gastos notariales, mismo que se reflejaran en su carta de instrucción.
+<br/><br/>
+                            Tercera.- El vendedor se compromete a entregar el inmueble de la presente operación Libre de Adeudo de Predial y Agua Potable, solo se realizara el pago a la fecha de la firma de la escritura.
+<br/><br/>
+                            Cuarta.-  Ambas partes coinciden en el precio final del artículo objeto del presente contrato.
+                        </p>
+                        <br/>
+                        <p style="text-align: justify;">
+                            Quinta.-  El beneficiario, se compromete a pagar los gastos y obligaciones correspondientes al trámite que bajo la promesa de compraventa, como son gastos de escrituración en caso de celebrarse el contrato.
+<br/><br/>
+                            Sexta.- Ambas partes fijan como fecha límite para celebrar el contrato formal de aproximadamente 15 días a partir de la firma del presente contrato, siempre y cuando la vivienda no tenga problemas ajenos a la empresa.
+<br/><br/>
+                            Séptima.- El presente contrato tendrá una vigencia de 90 días naturales a partir de la expedición y firma del mismo.
+<br/><br/>
+                            Octava.-. Ambas partes convienen de manera expresa en que si por cualquier motivo no se llegare a firmar, otorgar o celebrarse el contrato de compraventa definitivo en la fecha convenida, quedará sin efectos este instrumento jurídico y, por lo tanto, los promitentes no tendrán derecho al pago de indemnización alguna.
+<br/><br/>
+                            Novena.- El contratante se encuentra plenamente enterado, que de no concretarse la venta del inmueble referido o llegara a cancelar, se le generara una multa por la cantidad de $5,000.00 (cinco mil pesos 00/100 moneda nacional), misma que se compromete a pagar al momento de cancelar el trámite.
+<br/><br/>
+                            Decima. Con el presente contrato, se encuentran obligados ambas partes respecto al inmueble arriba citado y por ende da exclusividad o privilegio a la persona que firma el presente.
+<br/><br/>
+                            Siendo que las partes manifiestan la conformidad del presente contrato de promesa de compraventa firman
+                        </p>
+                        <br/><br/><br/><br/>
+                        <h2 style="text-align: center;">_________________________________</h2>
+                        <h5 style="text-align: center;">JORGE ARMANDO RODRÍGUEZ RUVALCABA</h5>
+                        <h6 style="text-align: center;">Apoderado de la Sociedad CORPORATIVO QUILA S.A. DE C.V.</h6>
+                        <br/><br/><br/><br/><br/><br/>
+                        <h2 style="text-align: center;">_________________________________</h2>
+                        <h5 style="text-align: center;"><b t-field="o.partner_id" /></h5>
+                        <h6 style="text-align: center;">COMPRADOR</h6>
+                        <br/><br/><br/><br/><br/><br/>
+                        <h2 style="text-align: center;">_________________________________</h2>
+                        <h5 style="text-align: center;">MIREYA VILLASEÑOR SANCHEZ</h5>
+                        <h6 style="text-align: center;">ASESOR</h6>
 
-                        <h2>Hola mundo</h2>
-                                
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
                        </div> <!---     DIV PAGE  -->
                     </t>
                 </t>    <!---     FOREACH DOCS  -->

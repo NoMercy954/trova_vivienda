@@ -35,6 +35,10 @@
                 <field name="folioreal" />
                 <field name="paquete"/>
                 <field name="subasta" />
+                <field name="preciocompra" widget="monetary"/>
+                <field name="precioventa" widget="monetary"/>
+
+
             </group>
             <group name="group_rigth">
                 <field name="desarrollo" />
@@ -160,6 +164,8 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='validity_date']" position="before">
                   <field name="vivienda"/>
+                  <field name="address"/>
+                  <field name="fechacontrato"/>
                 </xpath>
             </field>
 </record>
@@ -175,13 +181,13 @@
                     <page name="datos_generales" string="Datos Generales">
                             <group name="group"> 
                                 <group name="group_left">
-                                    <field name="fechanac"/>
-                                    <field name="curp"/>
-                                    <field name="esque_credito"/>
+                                    <field name="fechanac" required="1"/>
+                                    <field name="curp" required="1"/>
+                                    <field name="esque_credito" />
                                 </group>
                                 <group name="group_rigth">
                                     <field name="nss"/> 
-                                    <field name="estado_civil"/>
+                                    <field name="estado_civil" required="1"/>
                                     <field name="credito_conyu"/>
                                 </group>                     
                             </group>
@@ -221,7 +227,6 @@
                                 </group>                     
                             </group>
                     </page>
-
                 </xpath>
                 </field>          
   </record>
