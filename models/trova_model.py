@@ -56,7 +56,7 @@ class TrovaVivienda(models.Model):
 	avalcat = fields.Boolean('Avaluo Catastral',  help='Avaluo Catastral')
 	logo_viv = fields.Binary(string='Logo de encabezado')
 	etapas = fields.Selection([('disponible','Disponible'),
-							   ('invalida','Invalida'),
+							   ('invadida','Invadida'),
 							   ('poravaluo','Por avalúo'),
 							   ('porfirma','Por firmar'),
 							   ('firmada','Firmada'),
