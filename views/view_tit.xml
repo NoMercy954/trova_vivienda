@@ -8,7 +8,7 @@
             		<tree string ="Listado de titulaciones">
              			<field name="name"/>
              			<field name="folio" />
-             			<field name="etapa" />
+             			<field name="etapas" />
          			</tree> 
                 </field>
             </record>
@@ -29,7 +29,9 @@
                             <field name='folio'/>
                             <field name='asesor'/>
                             <field name='confirmventa'/>
-                            <field name="tipocredito" /> 
+                            <field name="tipocredito" />
+                            <field name='fechacaducacion'/>
+                            <field name='etapas'/>
                         </group>
                         <group name="group_rigth">
                             <field name="cliente" />

@@ -9,18 +9,6 @@ class TrovaVivienda(models.Model):
 	_name = 'trova.vivienda'
 	_description='Formulario de Viviendas'
 
-	def _name_default(self):
-		cr = self.env.cr
-		cr.execute('select "id" from "trova_vivienda" order by "id" desc limit 1')
-		id_returned = cr.fetchone()
-		if id_returned == None:
-			id_returned = (0,)
-		text=''
-		if((max(id_returned)+1)<100):
-			text='00'+str(max(id_returned)+1)
-		else:
-			text=str(max(id_returned)+1)
-		return "Vivienda{}".format(text)
 
 	def _folio_default(self):
 		cr = self.env.cr
@@ -34,12 +22,10 @@ class TrovaVivienda(models.Model):
 		else:
 			text=str(max(id_returned)+1)
 		return text
-
 			
 
-	name = fields.Char('Nombre' , size=150, required=True, default=_name_default)
+	name = fields.Char(string='Folio Real' , size=150, required=True)
 	folio = fields.Char('Folio' , required=True, help='Este es el Folio', default=_folio_default)
-	folioreal = fields.Integer('Folio Real' , size=20, required=True, help='Este es el Folio Real')
 	paquete = fields.Many2one('trova.vivienda.paquete',string='Paquete' , size=150, help='Este es el Paquete')
 	subasta = fields.Many2one('trova.vivienda.suba', string='Subasta' , size=150, help='Esta es la Subasta')
 	desarrollo = fields.Many2one('trova.vivienda.desa', string='Desarrollo' , size=150, help='Este es el desarrollo')
@@ -55,12 +41,12 @@ class TrovaVivienda(models.Model):
 	proteccion = fields.Boolean('Protecciones',  help='Protecciones')
 	avalcat = fields.Boolean('Avaluo Catastral',  help='Avaluo Catastral')
 	logo_viv = fields.Binary(string='Logo de encabezado')
-	etapas = fields.Selection([('disponible','Disponible'),
-							   ('invadida','Invadida'),
-							   ('poravaluo','Por avalúo'),
-							   ('porfirma','Por firmar'),
-							   ('firmada','Firmada'),
-							   ('cancelada','Cancelada')], help='Status',index=True)
+	etapas = fields.Selection([('Disponible','Disponible'),
+							   ('Invadida','Invadida'),
+							   ('Poravaluo','Por avalúo'),
+							   ('Porfirma','Por firmar'),
+							   ('Firmada','Firmada'),
+							   ('Cancelada','Cancelada')], help='Status',index=True)
 	precioventa = fields.Float('Precio de Venta' , required=True, help='Este sera el precio con el que se vendera la vivienda',  obj="res.currency")
 	preciocompra = fields.Float('Precio de Compra' , required=True, help='Este sera el precio con el que se comprara la vivienda',  obj="res.currency")
 	amount_to_text = fields.Char(compute='_get_amount_to_text', string='Monto en Texto', readonly=True,
@@ -69,7 +55,7 @@ class TrovaVivienda(models.Model):
 	@api.depends('precioventa')
 	def _get_amount_to_text(self):
 		self.amount_to_text = amount_to_text.get_amount_to_text(self, self.precioventa, 'MXN')
-	
+
 class TrovaVivTitu(models.Model):
 	
 	_name = 'trova.vivienda.titu'
@@ -91,20 +77,21 @@ class TrovaVivTitu(models.Model):
 
 
 	name = fields.Char('Nombre' , size=150, required=True, default=_name_default)
-	folio = fields.Many2one('trova.vivienda', string='Vivienda', required=True, help='Este es el Folio de la Vivienda')
-	etapa = fields.Many2one('trova.vivienda.etapa', string='Estapa', help='Es la estapa de la vivienda')
+	folio = fields.Many2one('trova.vivienda', string='Folio Real', required=True, help='Este es el Folio Real de la vivienda')
+	etapas = fields.Char(string='Estapa', help='Es la estapa de la vivienda')
 	confirmventa = fields.Char(string='Confirmacion de venta')
 	presupuesto = fields.Many2one('sale.order', string='Presupuestos')
 	asesor = fields.Many2one('res.users',string='Asesor', help='Lista de Asesores')
 	tipocredito = fields.Selection([('tradicional','Tradicional'),('contado','Contado')], string='Confirmacion de venta Tipo de Credito')
 	observaciones = fields.Selection([('habilitada','Habilitada'),('semihabilitada','Semihabilitada'),('sinhabilitar','Sin Habilitar')],string='Observaciones Vivienda', help='Observaciones')
 	comentariostit = fields.Text(string='Comentarios Titulacion', help='Comentarios sobre la Titulacion')
-	cliente = fields.Many2one('res.partner',string='Nombre del Cliente',)
+	cliente = fields.Many2one('res.partner',string='Nombre del Cliente')
 	nss = fields.Char(string='NSS', help='Ingresa el NSS')
 	telefono = fields.Char(string='Telefono', help='Telefono Fijo')
 	numtaria = fields.Char(string='Notaria', help='Notaria')
 	numcredifona = fields.Integer(string='No. Credito Infonavit', help='Es el numero de credito Infonavit')
 	fechacierre = fields.Date(string='Fecha Cierre')
+	fechacaducacion = fields.Date(string='Fecha de Caducacion')
 
 	@api.onchange('presupuesto')
 	def onchange_pres(self):
@@ -112,12 +99,15 @@ class TrovaVivTitu(models.Model):
 			self.confirmventa = str(self.presupuesto.confirmation_date)
 			self.asesor = self.presupuesto.user_id.id
 			self.folio = self.presupuesto.vivienda.id
+			self.etapas = self.presupuesto.vivienda.etapas
+
 
 	@api.onchange('cliente')
 	def onchange_clien(self):
 		if self.cliente:
 			self.nss = self.cliente.nss
 			self.telefono = self.cliente.phone
+
 class TrovaVivDesarollo(models.Model):
 	_name = 'trova.vivienda.desa'
 	_description = 'Pantalla de Desarrollo'
@@ -145,7 +135,7 @@ class TrovaVivSaneamiento(models.Model):
 
 
 	name = fields.Char(string='Nombre', size=150, required=True, default=_name_default)
-	folio = fields.Many2one('trova.vivienda', string='Vivienda', required=True, help='Este es el Folio de la Vivienda')
+	folioreal = fields.Many2one('trova.vivienda', string='Folio Real', required=True, help='Este es el Folio Real de la Vivienda')
 	address = fields.Char('Dirección' , size=150, required=True, help='Esta es la Direccion')
 	cuentapredial = fields.Char(string='Cuenta de predial', size=150, )
 	mpp = fields.Integer(string='Monto Pagado Predial', size=10, help='Monto pagado del Predial')
@@ -172,6 +162,7 @@ class TrovaVivSaneamiento(models.Model):
 		if self.folio:
 			self.address = self.folio.address
 			self.estado = self.folio.estado
+
 class TrovaVivPaq(models.Model):
 	_name = 'trova.vivienda.paquete'
 	_description = 'Ventana de paquetes'
@@ -203,14 +194,17 @@ class TrovaVivSale(models.Model):
 	"""docstring for TrovaTitu"""
 	_inherit = 'sale.order'
 
-	vivienda = fields.Many2one('trova.vivienda', string="Vivienda")
+	vivienda = fields.Many2one('trova.vivienda', string="Folio Real de la Vivienda")
 	address = fields.Char('Direccion' , size=150, required=True, help='Esta es la Direccion')
 	fechacontrato = fields.Datetime(string='Fecha del contrato' , required=True, help='Puedes elegir una fecha de impresion para el contrato')
+	etapas = fields.Char(string='Etapa Vivienda')
 
 	@api.onchange('vivienda')
 	def onchange_vivienda(self):
 		if self.vivienda:
 			self.address = self.vivienda.address
+			self.etapas = self.vivienda.etapas
+
 class TrovaVivClientes(models.Model):
 	_inherit = 'res.partner'
 
@@ -218,7 +212,7 @@ class TrovaVivClientes(models.Model):
 	curp = fields.Char(string='CURP', size=18, help='Ingresa tu CURP')
 	esque_credito = fields.Char(string='Esquema de Credito', size=100, help='Escribe tu Esquema de Credito')
 	nss = fields.Integer(string='NSS', help='Ingresa el Numero de Seguro Social')
-	estado_civil = etapas = fields.Selection([('soltero/a','Soltero/a'),
+	estado_civil = fields.Selection([('soltero/a','Soltero/a'),
 							   ('casado/a','Casado/a'),
 							   ('divorciado/a','Divorciado/a'),
 							   ('viudo/a','Viuda/a')], help='Estado civil')

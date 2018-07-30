@@ -21,7 +21,7 @@
                           <h2>
                           <field name="name" readonly="1"/>
                           </h2>
-               					  <field name="folio" />
+               					  <field name="folioreal" />
              						  <field name="address" />
                						<field name="cuentapredial"/>
                						<field name="mpp" />
@@ -45,6 +45,8 @@
                						<field name="cartografico" />
             					</group>                        
         					</group>
+
+                  
 						</sheet>
 					</form>
         </field>
