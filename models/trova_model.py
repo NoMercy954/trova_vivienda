@@ -156,6 +156,20 @@ class TrovaVivSaneamiento(models.Model):
 	certifiscal = fields.Char(string='Certificado Fiscal', size=150, help='Certificado Fiscal')
 	juntaurba = fields.Char(string='Junta Urbanización', size=150, help='Junta Urbanización')
 	cartografico = fields.Char(string='Cartográfico	', size=150, help='Ubicacion Cartográfica')
+	mpcarto = fields.Integer(String='Monto de pagado', help='Monto pagado por cartografico')
+	fechacarto = fields.Date(string='Fecha Pago cartografico')
+	mpnumofici = fields.Integer(string='Monto pagado por No. Oficial')
+	fechanumofi = fields.Date(string='Fecha Pago No. Oficial')
+	
+	secretfinan = fields.Char(string='Secretaria de Finanzas')
+	mpsecrefin = fields.Integer(string='Monto a pagar Finanzas')
+	fechasecfin = fields.Date(string='Fecha de pago Finanzas')
+	secretplanea = fields.Char(string='Secretaria de Planeacion')
+	mpsecreplan = fields.Integer(string='Monto a pagar Planeacin')
+	fechasecplan = fields.Date(string='Fecha de pago Planeacion')
+	mpurba = fields.Integer(string='Monto a pagar Junta')
+	fechaurba = fields.Date(string='Fecha de pago Junta')
+
 
 	@api.onchange('folio')
 	def onchange_folio(self):

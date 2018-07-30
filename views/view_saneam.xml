@@ -25,6 +25,7 @@
              						  <field name="address" />
                						<field name="cuentapredial"/>
                						<field name="mpp" />
+                          <field name="mpcp"/>
                						<field name="fechapp" widget='date'/>
                						<field name="mpcfe" />
                						<field name="fechapcfe" widget='date'/>
@@ -38,15 +39,36 @@
                 					<field name="certioyp" /> 
                						<field name="certinof" />
                						<field name="certinadeu" /> 
-               						<field name="no_oficial" />
                						<field name="certihipo" /> 
                						<field name="certifiscal" />
-               						<field name="juntaurba" /> 
-               						<field name="cartografico" />
+               			            						
             					</group>                        
         					</group>
 
-                  
+                  <notebook id="estados_especiales_fields">
+                      <page name="tijuana" string="Tijuana">
+                         <group name="group2"> 
+                           <group name="group_left">
+                            <field name="cartografico" />
+                            <field name="mpcarto" />
+                            <field name="fechacarto"/>
+                            <field name="no_oficial" />
+                            <field name="mpnumofici" />
+                            <field name="fechanumofi" />
+                         </group>
+                        <group name="group_rigth">
+                            <field name="secretfinan" /> 
+                            <field name="mpsecrefin" />
+                            <field name="fechasecfin" />
+                            <field name="mpsecreplan" /> 
+                            <field name="fechasecplan" /> 
+                            <field name="juntaurba" /> 
+                            <field name="mpurba" /> 
+                            <field name="fechaurba" /> 
+                        </group>                     
+                        </group>
+                    </page>
+                  </notebook>
 						</sheet>
 					</form>
         </field>

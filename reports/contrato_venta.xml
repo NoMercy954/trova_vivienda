@@ -4,7 +4,7 @@
         <template id="report_contrato_vent">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="o">
-                    <t t-call="web.external_layout">
+                    <t t-call="web.basic_layout">
                        <div class="page">
                         <h3 style="text-align: center;">Contrato de Promesa de Venta</h3>
                         <p style="text-align: justify;"> 
@@ -65,19 +65,35 @@
 <br/><br/>
                             Siendo que las partes manifiestan la conformidad del presente contrato de promesa de compraventa firman
                         </p>
-                        <br/><br/><br/><br/>
-                        <h2 style="text-align: center;">_________________________________</h2>
-                        <h5 style="text-align: center;">JORGE ARMANDO RODRÍGUEZ RUVALCABA</h5>
-                        <h6 style="text-align: center;">Apoderado de la Sociedad CORPORATIVO QUILA S.A. DE C.V.</h6>
-                        <br/><br/><br/><br/><br/><br/>
-                        <h2 style="text-align: center;">_________________________________</h2>
-                        <h5 style="text-align: center;"><b t-field="o.partner_id" /></h5>
-                        <h6 style="text-align: center;">COMPRADOR</h6>
-                        <br/><br/><br/><br/><br/><br/>
+                        <br/><br/><br/>
+                    <table>
+
+                        <tr>
+                            <td></td>
+                            <td>
+                            <h2 style="text-align: center;">_________________________________</h2>
+                            <h5 style="text-align: center;">JORGE ARMANDO RODRÍGUEZ RUVALCABA</h5>
+                            <h6 style="text-align: center;">Apoderado de la Sociedad CORPORATIVO QUILA S.A. DE C.V.</h6>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr></tr>
+                        <tr></tr>
+                        <tr></tr>
+                        <tr>
+                            <td>
+                            <h2 style="text-align: center;">_________________________________</h2>
+                            <h5 style="text-align: center;"><b t-field="o.partner_id" /></h5>
+                            <h6 style="text-align: center;">COMPRADOR</h6>
+                            </td>
+                        <td></td>
+                        <td>
                         <h2 style="text-align: center;">_________________________________</h2>
                         <h5 style="text-align: center;">MIREYA VILLASEÑOR SANCHEZ</h5>
                         <h6 style="text-align: center;">ASESOR</h6>
-
+                        </td>
+                    </tr>
+                    </table>
 
 
 
