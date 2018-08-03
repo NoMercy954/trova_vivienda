@@ -1,15 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <data>
-        <template id="report_contrato_vent">
+<t t-name="trova_vivienda.report_contrato_vent">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="o">
-                    <t t-call="web.basic_layout">
+                    <t t-call="web.external_layout">
+
                        <div class="page">
                         <h3 style="text-align: center;">Contrato de Promesa de Venta</h3>
                         <p style="text-align: justify;"> 
                             Contrato preparatorio de promesa de compraventa, que celebran por una parte La
-                            Sociedad denominada <b t-field="o.company_id.partner_id"></b>. representada en este acto por el Licenciado <b>JORGE ARMANDO RODRÍGUEZ RUVALCABA</b> como vendedor quien para los fines de este contrato será conocido como “El vendedor” y como contraparte el cliente <b t-field="o.partner_id" ></b>, que será denominado como comprador para los fines correspondientes.
+                            Sociedad denominada <b t-field="o.company_id.partner_id"/>. representada en este acto por el Licenciado <b>JORGE ARMANDO RODRÍGUEZ RUVALCABA</b> como vendedor quien para los fines de este contrato será conocido como “El vendedor” y como contraparte el cliente <b t-field="o.partner_id"/>, que será denominado como comprador para los fines correspondientes.
                         </p>
                         <br/>
                         <p style="text-align: justify;"> 
@@ -23,14 +21,14 @@
                         <h4 style="text-align: center;">Declaraciones:</h4>
                         <br/>
                         <p style="text-align: justify;">
-                            - A) Vendedor: <b t-field="o.user_id"></b>. Representada en este acto por el Licenciado JORGE ARMANDO RODRÍGUEZ RUVALCABA, Av. Niños Héroes  #2285  int 201, Col. Moderna, Guadalajara, Jalisco, Teléfonos: (33) 3615 0195 O (33) 3616 2385 Correo: atencionalcliente@trovainmobiliaria.com.
+                            - A) Vendedor: <b t-field="o.user_id"/>. Representada en este acto por el Licenciado JORGE ARMANDO RODRÍGUEZ RUVALCABA, Av. Niños Héroes  #2285  int 201, Col. Moderna, Guadalajara, Jalisco, Teléfonos: (33) 3615 0195 O (33) 3616 2385 Correo: atencionalcliente@trovainmobiliaria.com.
                         </p>
                         <p style="text-align: justify;">
-                            - B) Comprador: <b t-field="o.partner_id"></b>, con fecha de nacimiento <spant t-field="o.partner_id.fechanac"/>, y el cual cuanta con Clave Única de Registro de Población <spant t-field="o.partner_id.curp"/> y cuento con Registro Federal de Contribuyentes <spant t-field="o.partner_id.vat"/>, con domicilio en <spant t-field="o.partner_id.street_name"/>, colonia <spant t-field="o.partner_id.l10n_mx_edi_colony"/> con numero exterior <spant t-field="o.partner_id.street_number"/>, numero interior <spant t-field="o.partner_id.street_number2"/> en la localidad de <spant t-field="o.partner_id.l10n_mx_edi_locality"/> estado de <spant t-field="o.partner_id.state_id"/>, y cuenta con número de teléfono <spant t-field="o.partner_id.phone"/>.
+                            - B) Comprador: <b t-field="o.partner_id"/>, con fecha de nacimiento <spant t-field="o.partner_id.fechanac"/>, y el cual cuanta con Clave Única de Registro de Población <spant t-field="o.partner_id.curp"/> y cuento con Registro Federal de Contribuyentes <spant t-field="o.partner_id.vat"/>, con domicilio en <spant t-field="o.partner_id.street_name"/>, colonia <spant t-field="o.partner_id.l10n_mx_edi_colony"/> con numero exterior <spant t-field="o.partner_id.street_number"/>, numero interior <spant t-field="o.partner_id.street_number2"/> en la localidad de <spant t-field="o.partner_id.l10n_mx_edi_locality"/> estado de <spant t-field="o.partner_id.state_id"/>, y cuenta con número de teléfono <spant t-field="o.partner_id.phone"/>.
                         </p>
                         <br/>
                         <p style="text-align: justify;">
-                            “El vendedor” declara ser propietario de un inmueble ubicado en <b t-field="o.vivienda.address"></b>, en el municipio de <b t-field="o.vivienda.municipio"></b>, en el Estado de <b t-field="o.vivienda.estado"></b>.
+                            “El vendedor” declara ser propietario de un inmueble ubicado en <b t-field="o.vivienda.address"/>, en el municipio de <b t-field="o.vivienda.municipio"/>, en el Estado de <b t-field="o.vivienda.estado"/>.
                         </p>
                         <br/>
                         <p style="text-align: justify;">
@@ -42,7 +40,7 @@
                         <p style="text-align: justify;">
                             Primera.- Por medio de este contrato el vendedor, se compromete a otorgar y firmar un contrato formal de compraventa a favor del interesado, respecto al inmueble  arriba citado.
 <br/><br/>
-                            Segunda. - Para este fin, se fija un monto de $ <b t-field="o.vivienda.precioventa"/> (<b t-field="o.vivienda.amount_to_text"></b>)  
+                            Segunda. - Para este fin, se fija un monto de $ <b t-field="o.vivienda.precioventa"/> (<b t-field="o.vivienda.amount_to_text"/>)  
  Siendo valor total de la compraventa más gastos notariales, mismo que se reflejaran en su carta de instrucción.
 <br/><br/>
                             Tercera.- El vendedor se compromete a entregar el inmueble de la presente operación Libre de Adeudo de Predial y Agua Potable, solo se realizara el pago a la fecha de la firma de la escritura.
@@ -65,52 +63,36 @@
 <br/><br/>
                             Siendo que las partes manifiestan la conformidad del presente contrato de promesa de compraventa firman
                         </p>
-                        <br/><br/><br/>
-                    <table>
+                        <br/><br/>
+                    <table style="margin: auto;">
 
                         <tr>
-                            <td></td>
+                            <td/>
                             <td>
-                            <h2 style="text-align: center;">_________________________________</h2>
+                            <spand style="text-align: center;">________________________________________</spand>
                             <h5 style="text-align: center;">JORGE ARMANDO RODRÍGUEZ RUVALCABA</h5>
                             <h6 style="text-align: center;">Apoderado de la Sociedad CORPORATIVO QUILA S.A. DE C.V.</h6>
                             </td>
-                            <td></td>
+                            <td/>
                         </tr>
-                        <tr></tr>
-                        <tr></tr>
-                        <tr></tr>
+                        <tr><td><br/></td></tr>
+                        <tr><td><br/></td></tr>
                         <tr>
                             <td>
-                            <h2 style="text-align: center;">_________________________________</h2>
-                            <h5 style="text-align: center;"><b t-field="o.partner_id" /></h5>
+                            <spand style="text-align: center;">______________________________</spand>
+                            <h5 style="text-align: center;"><b t-field="o.partner_id"/></h5>
                             <h6 style="text-align: center;">COMPRADOR</h6>
                             </td>
-                        <td></td>
+                        <td/>
                         <td>
-                        <h2 style="text-align: center;">_________________________________</h2>
+                        <spand style="text-align: center;">______________________________</spand>
                         <h5 style="text-align: center;">MIREYA VILLASEÑOR SANCHEZ</h5>
                         <h6 style="text-align: center;">ASESOR</h6>
                         </td>
                     </tr>
                     </table>
-
-
-
                        </div> <!---     DIV PAGE  -->
                     </t>
                 </t>    <!---     FOREACH DOCS  -->
             </t>
-        </template>
-
-        <report
-            string="Contrato de Venta"
-            id="action_report_contrato_viv"
-            model="sale.order"
-            report_type="qweb-pdf"
-            name="trova_vivienda.report_contrato_vent"
-            file="trova_vivienda.report_contrato_vent"
-        />
-
-    </data>
-</odoo>
+        </t>

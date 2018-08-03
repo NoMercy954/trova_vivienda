@@ -76,9 +76,16 @@ class TrovaVivTitu(models.Model):
 		return "Titulacion{}".format(text)
 
 
+		
+
 	name = fields.Char('Nombre' , size=150, required=True, default=_name_default)
 	folio = fields.Many2one('trova.vivienda', string='Folio Real', required=True, help='Este es el Folio Real de la vivienda')
-	etapas = fields.Char(string='Estapa', help='Es la estapa de la vivienda')
+	etapas = fields.Selection([('Disponible','Disponible'),
+							   ('Invadida','Invadida'),
+							   ('Poravaluo','Por avalúo'),
+							   ('Porfirma','Por firmar'),
+							   ('Firmada','Firmada'),
+							   ('Cancelada','Cancelada')], help='Status',index=True)
 	confirmventa = fields.Char(string='Confirmacion de venta')
 	presupuesto = fields.Many2one('sale.order', string='Presupuestos')
 	asesor = fields.Many2one('res.users',string='Asesor', help='Lista de Asesores')
@@ -95,11 +102,14 @@ class TrovaVivTitu(models.Model):
 
 	@api.onchange('presupuesto')
 	def onchange_pres(self):
-		if self.presupuesto:
-			self.confirmventa = str(self.presupuesto.confirmation_date)
+		if self.presupuesto:			
 			self.asesor = self.presupuesto.user_id.id
 			self.folio = self.presupuesto.vivienda.id
 			self.etapas = self.presupuesto.vivienda.etapas
+			if(self.presupuesto.confirmation_date):
+				self.confirmventa = str(self.presupuesto.confirmation_date)
+			else:
+				self.confirmventa='Pendiente'
 
 
 	@api.onchange('cliente')
@@ -156,7 +166,7 @@ class TrovaVivSaneamiento(models.Model):
 	certifiscal = fields.Char(string='Certificado Fiscal', size=150, help='Certificado Fiscal')
 	juntaurba = fields.Char(string='Junta Urbanización', size=150, help='Junta Urbanización')
 	cartografico = fields.Char(string='Cartográfico	', size=150, help='Ubicacion Cartográfica')
-	mpcarto = fields.Integer(String='Monto de pagado', help='Monto pagado por cartografico')
+	mpcarto = fields.Integer(string='Monto de pagado', help='Monto pagado por cartografico')
 	fechacarto = fields.Date(string='Fecha Pago cartografico')
 	mpnumofici = fields.Integer(string='Monto pagado por No. Oficial')
 	fechanumofi = fields.Date(string='Fecha Pago No. Oficial')
@@ -211,7 +221,12 @@ class TrovaVivSale(models.Model):
 	vivienda = fields.Many2one('trova.vivienda', string="Folio Real de la Vivienda")
 	address = fields.Char('Direccion' , size=150, required=True, help='Esta es la Direccion')
 	fechacontrato = fields.Datetime(string='Fecha del contrato' , required=True, help='Puedes elegir una fecha de impresion para el contrato')
-	etapas = fields.Char(string='Etapa Vivienda')
+	etapas = fields.Selection([('Disponible','Disponible'),
+							   ('Invadida','Invadida'),
+							   ('Poravaluo','Por avalúo'),
+							   ('Porfirma','Por firmar'),
+							   ('Firmada','Firmada'),
+							   ('Cancelada','Cancelada')], help='Status',index=True)
 
 	@api.onchange('vivienda')
 	def onchange_vivienda(self):

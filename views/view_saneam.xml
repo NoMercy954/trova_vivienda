@@ -7,6 +7,8 @@
         		<field name="arch" type="xml"> 
             		<tree string ="Saneamiento">
              			<field name="name"/>
+                  <field name="folioreal" />
+                  <field name="address" />
          			  </tree>      	
      			   </field>
   		  </record>
@@ -18,35 +20,39 @@
         				<sheet> 
         					<group name="group0"> 
             					<group name="group_left">
-                          <h2>
-                          <field name="name" readonly="1"/>
-                          </h2>
+                          <h2><field name="name" readonly="1"/></h2>
                					  <field name="folioreal" />
              						  <field name="address" />
-               						<field name="cuentapredial"/>
-               						<field name="mpp" />
-                          <field name="mpcp"/>
-               						<field name="fechapp" widget='date'/>
-               						<field name="mpcfe" />
-               						<field name="fechapcfe" widget='date'/>
-            					</group>
-            					<group name="group_rigth">
-               					  <field name="estado" />
-             					    <field name="cuentagua"/> 
-                					<field name="mpa" /> 
-               						<field name="mpca" />
-                					<field name="fechapa" widget='date'/>
-                					<field name="certioyp" /> 
-               						<field name="certinof" />
-               						<field name="certinadeu" /> 
-               						<field name="certihipo" /> 
-               						<field name="certifiscal" />
-               			            						
-            					</group>                        
+                          <field name="estado" />
+            					</group>                     
         					</group>
 
                   <notebook id="estados_especiales_fields">
-                      <page name="tijuana" string="Tijuana">
+                      <page name="estados" string="Estados Generales">
+                         <group name="group2"> 
+                           <group name="group_left">
+                          <field name="cuentapredial"/>
+                          <field name="mpp" />
+                          <field name="mpcp"/>
+                          <field name="fechapp" widget='date'/>
+                          <field name="mpcfe" />
+                          <field name="fechapcfe" widget='date'/>
+                         </group>
+                        <group name="group_rigth">
+                          <field name="cuentagua"/> 
+                          <field name="mpa" /> 
+                          <field name="mpca" />
+                          <field name="fechapa" widget='date'/>
+                          <field name="certioyp" /> 
+                          <field name="certinof" />
+                          <field name="certinadeu" /> 
+                          <field name="certihipo" /> 
+                          <field name="certifiscal" />
+                        </group>                     
+                        </group>
+                    </page>
+
+                    <page name="tijuana" string="Tijuana">
                          <group name="group2"> 
                            <group name="group_left">
                             <field name="cartografico" />
@@ -68,6 +74,7 @@
                         </group>                     
                         </group>
                     </page>
+
                   </notebook>
 						</sheet>
 					</form>
