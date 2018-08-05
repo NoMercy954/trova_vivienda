@@ -46,7 +46,7 @@ class TrovaVivienda(models.Model):
 							   ('Poravaluo','Por avalúo'),
 							   ('Porfirma','Por firmar'),
 							   ('Firmada','Firmada'),
-							   ('Cancelada','Cancelada')], help='Status',index=True)
+							   ('Cancelada','Cancelada')], help='Status',index=True, default='Disponible')
 	precioventa = fields.Float('Precio de Venta' , required=True, help='Este sera el precio con el que se vendera la vivienda',  obj="res.currency")
 	preciocompra = fields.Float('Precio de Compra' , required=True, help='Este sera el precio con el que se comprara la vivienda',  obj="res.currency")
 	amount_to_text = fields.Char(compute='_get_amount_to_text', string='Monto en Texto', readonly=True,
@@ -85,7 +85,7 @@ class TrovaVivTitu(models.Model):
 							   ('Poravaluo','Por avalúo'),
 							   ('Porfirma','Por firmar'),
 							   ('Firmada','Firmada'),
-							   ('Cancelada','Cancelada')], help='Status',index=True)
+							   ('Cancelada','Cancelada')], help='Status',index=True,default='Disponible' )
 	confirmventa = fields.Char(string='Confirmacion de venta')
 	presupuesto = fields.Many2one('sale.order', string='Presupuestos')
 	asesor = fields.Many2one('res.users',string='Asesor', help='Lista de Asesores')
@@ -226,7 +226,7 @@ class TrovaVivSale(models.Model):
 							   ('Poravaluo','Por avalúo'),
 							   ('Porfirma','Por firmar'),
 							   ('Firmada','Firmada'),
-							   ('Cancelada','Cancelada')], help='Status',index=True)
+							   ('Cancelada','Cancelada')], help='Status',index=True, default='Disponible')
 
 	@api.onchange('vivienda')
 	def onchange_vivienda(self):
