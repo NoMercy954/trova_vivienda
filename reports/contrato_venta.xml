@@ -2,10 +2,10 @@
 <odoo>
     <data>
         <template id="report_pagos_destajo">
-                <t t-name="trova_vivienda.report_contrato_vent">
-            <t t-call="web.html_container">
-                <t t-foreach="docs" t-as="o">
-                    <t t-call="web.external_layout">
+            <t t-name="trova_vivienda.report_contrato_vent">
+                <t t-call="web.html_container">
+                    <t t-foreach="docs" t-as="o">
+                        <t t-call="web.external_layout">
 
                        <div class="page">
                         <h3 style="text-align: center;">Contrato de Promesa de Venta</h3>
